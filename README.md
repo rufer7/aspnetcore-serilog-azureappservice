@@ -2,12 +2,12 @@
 
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/rufer7/aspnetcore-serilog-azureappservice/blob/main/LICENSE)
 
-Simple ASP.NET Core web API using Serilog to log to Azure Application Insights and App Service Log Stream
+Simple ASP.NET Core Web API using Serilog to log to Azure Application Insights and App Service Log Stream
 
 ## Logging
 
-The .NET Core web API in this repository uses `ILogger` of NuGet package `Microsoft.Extensions.Logging`. `ILogger<T>` is injected into the constructor of the class that needs to log.
-The underlying logging framework is [Serilog](https://serilog.net/). Serilog is configured in `Program.cs` and `appsettings.json` of the application.
+The .NET Core Web API in this repository uses `ILogger` of NuGet package `Microsoft.Extensions.Logging`. `ILogger<T>` is injected into the constructor of the class that needs to log.
+The underlying logging framework is [Serilog](https://serilog.net/). Serilog is configured in `Program.cs` and `appsettings.json` (`appsettings.Development.json` for local development environment) of the application.
 
 Serilog is configured so that the application logs to the following sinks:
 
@@ -20,8 +20,8 @@ Serilog is configured so that the application logs to the following sinks:
 > [!IMPORTANT]  
 > In this sample Serilog is configured for Linux Azure App Services
 
-Serilog creates traces in Application Insights (`TraceTelemetry`) for log levels `Information`, `Warning`, `Error` and `Fatal`. However, if the log event contains any exceptions it will always be sent as `ExceptionTelemetry` to Application Insights.
-To make Serilog sending logs of log level `Debug` to Application Insights, the following application setting has to be added to the Azure App Service:
+Serilog creates traces in Application Insights (`TraceTelemetry`) for log levels defined in `appsettings.json` `MinimumLevel`. However, if the log event contains any exceptions it will always be sent as `ExceptionTelemetry` to Application Insights.
+To make Serilog sending custom application logs of log level `Debug` to Application Insights, the following application setting has to be added to the Azure App Service (see `Settings` > `Configuration` of App Service):
 
 - Name: `Serilog__MinimumLevel__Default`
 - Value: `Debug`
@@ -36,7 +36,7 @@ To query the application logs in Azure Application Insights, proceed as follows:
 1. Log in to the [Azure Portal](https://portal.azure.com/)
 2. Switch to the corresponding directory (Azure tenant)
 3. Search for `Application Insights` in the search bar on the top
-4. Select the application insights resource the app runs on
+4. Select the application insights resource the app sends its logs to
 5. Navigate to `Logs` in section `Monitoring` in the menu on the left
 6. Enter one of the following queries in the query editor and click `Run`:
    - To query non exception logs
@@ -47,10 +47,12 @@ To query the application logs in Azure Application Insights, proceed as follows:
    - To query exception logs
      ```
      exceptions
-     | where message startswith "START_OF_LOG_MESSAGE"
      ```
 
 ### Stream logs
+
+> [!IMPORTANT]  
+> The Filesystem option is for temporary debugging purposes, and turns itself off in 12 hours!
 
 To stream the application logs in near-realtime, proceed as follows:
 
@@ -90,13 +92,31 @@ To stream the application logs in near-realtime, proceed as follows:
 
 1. Ensure the following application setting is set in the Azure App Service:
 
-This setting is already set, if deployment is done using GitHub Actions integration.
+   This setting is already set, if deployment is done using GitHub Actions integration.
+
+   - Name: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+   - Value: connection string of the before created application insights resource
 
 > [!IMPORTANT]
 > Without this setting, the application will not log to Application Insights.
 
-- Name: `APPLICATIONINSIGHTS_CONNECTION_STRING`
-- Value: connection string of the before created application insights resource
+After successful deployment, the weather forecast API endpoint is available under `APP_SERVICE_DEFAULT_DOMAIN/WeatherForecast`
+
+## Screenshots
+
+### Console logs
+
+![image](https://github.com/rufer7/aspnetcore-serilog-azureappservice/assets/5937292/8e993089-81f0-4b35-a261-01e5b333de09)
+
+### Azure Application Insights
+
+![image](https://github.com/rufer7/aspnetcore-serilog-azureappservice/assets/5937292/82ad950e-0668-4328-bd4b-a98c858293d9)
+
+![image](https://github.com/rufer7/aspnetcore-serilog-azureappservice/assets/5937292/4fb0705f-dd0b-42e6-869d-309b16e1ffc1)
+
+### Azure App Service Log Stream
+
+
 
 ## Links
 
