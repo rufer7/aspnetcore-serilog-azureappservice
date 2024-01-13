@@ -64,6 +64,38 @@ To stream the application logs in near-realtime, proceed as follows:
 8. Click Save
 9. Navigate to `Log stream` in section `Monitoring` in the menu on the left
 
+## Deployment to Azure
+
+### Prerequisites
+
+- Azure tenant
+- Azure subscription
+
+### Step by Step Manual
+
+1. Create a new resource group (i.e. `aspnetcore-serilog-azureappservice`)
+1. Create a new workspace-based application insights resource in the before created resource group (i.e. `aspnetcore-serilog-azureappservice-appinsights`)
+1. Create a new app service plan in the before created resource group (i.e. `aspnetcore-serilog-azureappservice-appplan`)
+
+   - Operating system: `Linux`
+   - Pricing tier: `F1`
+
+1. Create a new web app (i.e. `aspnetcore-serilog-azureappservice-app`)
+
+   - Publish: `Code`
+   - Runtime stack: `.NET 8 (LTS)`
+   - Operating system: `Linux`
+   - Linux Plan: select before created app service plan
+   - Enable and configure continuous deployment under `Deployment` tab
+
+1. Add the following application settings to the web app:
+
+- Name: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- Value: connection string of the before created application insights resource
+
+> [!IMPORTANT]
+> Without this setting, the application will not log to Application Insights
+
 ## Links
 
 - [Serilog](https://serilog.net/)
