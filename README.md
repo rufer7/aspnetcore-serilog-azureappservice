@@ -88,13 +88,15 @@ To stream the application logs in near-realtime, proceed as follows:
    - Linux Plan: select before created app service plan
    - Enable and configure continuous deployment under `Deployment` tab
 
-1. Add the following application settings to the web app:
+1. Ensure the following application setting is set in the Azure App Service:
+
+This setting is already set, if deployment is done using GitHub Actions integration.
+
+> [!IMPORTANT]
+> Without this setting, the application will not log to Application Insights.
 
 - Name: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 - Value: connection string of the before created application insights resource
-
-> [!IMPORTANT]
-> Without this setting, the application will not log to Application Insights
 
 ## Links
 
