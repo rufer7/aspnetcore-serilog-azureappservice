@@ -26,6 +26,9 @@ namespace AspNetCoreWebApiSerilogSample.Controllers
             _logger.LogInformation("An information log message");
             _logger.LogWarning("A warn log message");
             _logger.LogError("An error log message");
+            _logger.LogCritical("A critical log message");
+            _logger.LogError(new ArgumentException(), "An error log message with exception");
+            _logger.LogCritical(new StackOverflowException(), "A critical log message");
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
