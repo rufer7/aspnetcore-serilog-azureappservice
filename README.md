@@ -35,14 +35,20 @@ To query the application logs in Azure Application Insights, proceed as follows:
 
 1. Log in to the [Azure Portal](https://portal.azure.com/)
 2. Switch to the corresponding directory (Azure tenant)
-3. Search for `App Service` in the search bar on the top
-4. Select the app service resource the app runs on
+3. Search for `Application Insights` in the search bar on the top
+4. Select the application insights resource the app runs on
 5. Navigate to `Logs` in section `Monitoring` in the menu on the left
-6. Enter the following query in the query editor and click `Run`:
-   ```
-   traces
-   | where message startswith "START_OF_LOG_MESSAGE"
-   ```
+6. Enter one of the following queries in the query editor and click `Run`:
+   - To query non exception logs
+     ```
+     traces
+     | where message startswith "START_OF_LOG_MESSAGE"
+     ```
+   - To query exception logs
+     ```
+     exceptions
+     | where message startswith "START_OF_LOG_MESSAGE"
+     ```
 
 ### Stream logs
 
