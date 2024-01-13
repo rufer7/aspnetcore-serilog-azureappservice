@@ -51,8 +51,8 @@ To query the application logs in Azure Application Insights, proceed as follows:
 
 ### Stream logs
 
-> [!IMPORTANT]  
-> The Filesystem option is for temporary debugging purposes, and turns itself off in 12 hours!
+> [!IMPORTANT]
+> Make sure you check the whole stream for your logs as they seem to not be ordered by date but by log file
 
 To stream the application logs in near-realtime, proceed as follows:
 
@@ -60,11 +60,7 @@ To stream the application logs in near-realtime, proceed as follows:
 2. Switch to the corresponding directory (Azure tenant)
 3. Search for `App Service` in the search bar on the top
 4. Select the app service resource the app runs on
-5. Navigate to `App Service logs` in section `Monitoring` in the menu on the left
-6. Switch `Application logging` to `File System`
-7. Enter desired retention period in days
-8. Click Save
-9. Navigate to `Log stream` in section `Monitoring` in the menu on the left
+5. Navigate to `Log stream` in section `Monitoring` in the menu on the left
 
 ## Deployment to Azure
 
@@ -116,7 +112,7 @@ After successful deployment, the weather forecast API endpoint is available unde
 
 ### Azure App Service Log Stream
 
-
+![image](https://github.com/rufer7/aspnetcore-serilog-azureappservice/assets/5937292/69c87ce9-f772-49a0-af78-e541c75785d6)
 
 ## Links
 
