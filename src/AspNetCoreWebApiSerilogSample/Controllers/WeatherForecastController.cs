@@ -21,6 +21,12 @@ namespace AspNetCoreWebApiSerilogSample.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogTrace("A trace log message");
+            _logger.LogDebug("A debug log message");
+            _logger.LogInformation("An information log message");
+            _logger.LogWarning("A warn log message");
+            _logger.LogError("An error log message");
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
