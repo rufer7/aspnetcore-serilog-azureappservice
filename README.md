@@ -29,6 +29,12 @@ To make Serilog sending custom application logs of log level `Debug` to Applicat
 > [!IMPORTANT]
 > This setting should only be added to the Azure App Service in case of troubleshooting. Otherwise, the logs will be flooded with debug logs.
 
+### Smart Request Logging
+
+The NuGet package [Serilog.AspNetCore](https://www.nuget.org/packages/Serilog.AspNetCore) includes middleware for request logging which can be configured to make logs and exceptions from .NET core middleware visible in the logs.
+
+For more details see [here](https://github.com/serilog/serilog-aspnetcore?tab=readme-ov-file#request-logging)
+
 ### Azure Application Insights
 
 To query the application logs in Azure Application Insights, proceed as follows:
