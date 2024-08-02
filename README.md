@@ -123,4 +123,4 @@ After successful deployment, the weather forecast API endpoint is available unde
 ## Links
 
 - [Serilog](https://serilog.net/)
-- https://learn.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
+- [Troubleshoot diagnostics logs](https://learn.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs?WT.mc_id=MVP_344197)
