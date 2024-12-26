@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
           include-prerelease: true
@@ -50,7 +50,7 @@ jobs:
           name: .net-app
       
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2F3ABA4E855F4CFB81C7FB401020DD0E }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1F7140F4130548C99813AE1F5C1AB32A }}
@@ -63,4 +63,3 @@ jobs:
           app-name: 'aspnetcore-serilog-azureappservice-app'
           slot-name: 'Production'
           package: .
-          
